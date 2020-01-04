@@ -1,4 +1,4 @@
-all: screen keyboard computer database
+all: screen keyboard computer database date
 	g++ *.o main.cpp -o prog
 
 run: clean
@@ -18,3 +18,6 @@ computer:
 
 database:
 	g++ -c Database.cpp
+
+date:
+	g++ -c Date.cpp
