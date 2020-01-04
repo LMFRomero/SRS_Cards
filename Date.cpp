@@ -34,19 +34,19 @@ int Date::getYear() {
 	return year;
 }
 
-bool Date::lessThan(Date date) {
+bool Date::operator < (Date date) {
 	if (this->year < date.getYear()) return true;
 	else if (this->year == date.getYear() and this->month < date.getMonth()) return true;
-	if (this->year == date.getYear() and this->getMonth() == date.getMonth() and this->day < date.getDay()) return true;
+	if (this->year == date.getYear() and this->month == date.getMonth() and this->day < date.getDay()) return true;
 	return false;
 }
 
-bool Date::equal(Date date) {
+bool Date::operator = (Date date) {
 	if (this->year == date.getYear() and this->month == date.getMonth() and this->day == date.getDay()) return true;
 	return false;
 }
 
-bool Date::greaterThan(Date date) {
+bool Date::operator > (Date date) {
 	if (this->year > date.getYear()) return true;
 	else if (this->year == date.getYear() and this->month > date.getMonth()) return true;
 	if (this->year == date.getYear() and this->month == date.getMonth() and this->day > date.getDay()) return true;

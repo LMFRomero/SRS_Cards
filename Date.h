@@ -10,9 +10,9 @@ class Date {
 		int getDay(void);
 		int getMonth(void);
 		int getYear(void);
-		bool lessThan(Date);
-		bool equal(Date);
-		bool greaterThan(Date);
+		bool operator < (Date);
+		bool operator = (Date);
+		bool operator > (Date);
 	private:
 		int day;
 		int month;
