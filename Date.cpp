@@ -4,9 +4,11 @@
 using namespace std;
 
 Date::Date(int day, int month, int year) {
-	cout << day << endl;
-	setDay(day);
+	//there is no need for any validations since the Date Class
+	//will not be used by users
+	
 	setMonth(month);
+	setDay(day);
 	setYear(year);
 }
 
@@ -15,7 +17,7 @@ void Date::setDay(int Day) {
 }
 
 void Date::setMonth(int Month) {	
-	month = Month%12;
+	month = Month;
 }
 
 void Date::setYear(int Year) {
@@ -53,3 +55,8 @@ bool Date::operator > (Date date) {
 	return false;
 }
 
+Date Date::operator + (int days) {
+	//this operator sums days to a date
+	
+
+}
