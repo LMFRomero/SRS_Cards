@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include "Date.h"
 
 using namespace std;
@@ -39,7 +40,7 @@ int Date::getYear() {
 bool Date::operator < (Date date) {
 	if (this->year < date.getYear()) return true;
 	else if (this->year == date.getYear() and this->month < date.getMonth()) return true;
-	if (this->year == date.getYear() and this->month == date.getMonth() and this->day < date.getDay()) return true;
+	else if (this->year == date.getYear() and this->month == date.getMonth() and this->day < date.getDay()) return true;
 	return false;
 }
 
@@ -51,12 +52,20 @@ bool Date::operator = (Date date) {
 bool Date::operator > (Date date) {
 	if (this->year > date.getYear()) return true;
 	else if (this->year == date.getYear() and this->month > date.getMonth()) return true;
-	if (this->year == date.getYear() and this->month == date.getMonth() and this->day > date.getDay()) return true;
+	else if (this->year == date.getYear() and this->month == date.getMonth() and this->day > date.getDay()) return true;
 	return false;
 }
 
-Date Date::operator + (int days) {
+Date Date::operator + (int Days) {
 	//this operator sums days to a date
 	
+	short unsigned int Year = year, Month = month, Day = day;
+	boost::gregorian::date dateObj {Year, Month, Day};
+	boost::gregorian::days daysObj (Days);
+	dateObj += daysObj;
 
+	Date result(dateObj.day(), dateObj.month(), dateObj.year());
+
+	return result;
 }
+

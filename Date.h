@@ -13,10 +13,12 @@ class Date {
 		bool operator < (Date);
 		bool operator = (Date);
 		bool operator > (Date);
+		Date operator + (int);
 	private:
 		int day;
 		int month;
 		int year;		
+		bool isBissext();
 };
 
 #endif

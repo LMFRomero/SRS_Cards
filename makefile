@@ -1,3 +1,6 @@
+test: screen keyboard computer database date
+	g++ test.cpp -o test *.o; ./test
+
 all: screen keyboard computer database date
 	g++ *.o main.cpp -o prog
 
@@ -20,4 +23,4 @@ database:
 	g++ -c Database.cpp
 
 date:
-	g++ -c Date.cpp
+	g++ -c Date.cpp -I ./boost
