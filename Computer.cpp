@@ -15,6 +15,18 @@ void Computer::run (void) {
 		mainMenuChoice = displayMainMenu();
 
 		switch (mainMenuChoice) {
+			case FLASHCARDS:
+				screen.displayLineMessage("Coming Soon...");
+				break;
+
+			case STUDY:
+				screen.displayLineMessage("Coming Soon...");
+				break;
+
+			case MODIFY:
+				screen.displayLineMessage("Coming Soon...");
+				break;
+
 			case EXIT:
 				userExited = true;
 				screen.displayLineMessage("Thank you!");
