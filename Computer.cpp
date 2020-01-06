@@ -1,22 +1,31 @@
 #include <bits/stdc++.h>
 #include "Computer.h"
+#include "Exercise.h"
+#include "Modify.h"
 
 using namespace std;
 
 
 enum menuOption {EXIT = 0, FLASHCARDS, STUDY, MODIFY};
 
-
 void Computer::run (void) {
+
 	bool userExited = false;
 	int mainMenuChoice;
+
+	Exercise *exercise;
+	Modify *modify;
 
 	while (!userExited) {
 		mainMenuChoice = displayMainMenu();
 
 		switch (mainMenuChoice) {
 			case FLASHCARDS:
-				screen.displayLineMessage("Coming Soon...");
+				exercise = new Exercise(keyboard, screen, database);
+
+				exercise->execute();
+
+				delete exercise;
 				break;
 
 			case STUDY:
@@ -24,7 +33,11 @@ void Computer::run (void) {
 				break;
 
 			case MODIFY:
-				screen.displayLineMessage("Coming Soon...");
+				modify = new Modify(keyboard, screen, database);
+
+				modify->execute();			
+
+				delete modify;
 				break;
 
 			case EXIT:
@@ -50,3 +63,4 @@ int Computer::displayMainMenu (void) {
 
 }
 
+ 

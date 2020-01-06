@@ -44,7 +44,7 @@ bool Date::operator < (Date date) {
 	return false;
 }
 
-bool Date::operator = (Date date) {
+bool Date::operator == (Date date) {
 	if (this->year == date.getYear() and this->month == date.getMonth() and this->day == date.getDay()) return true;
 	return false;
 }

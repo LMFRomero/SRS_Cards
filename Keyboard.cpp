@@ -1,17 +1,20 @@
 #include <iostream>
+#include <stdlib.h>
 #include "Keyboard.h"
 
 using namespace std;
 
 int Keyboard::getMenuOption(void) {
-	int answer;
+	char *answer;
+	char *pEnd;
 
 	fflush(stdin);
 	fflush(stdout);
 
-	scanf("%d", &answer);
+	scanf(" %[^\n\r]", answer);
+	int number = static_cast<int> (strtol(answer, &pEnd, 10));
 
-	return answer;
+	return number;
 }
 
 string Keyboard::getAnswer(void) {

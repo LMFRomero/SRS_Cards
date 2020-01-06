@@ -11,7 +11,7 @@ class Date {
 		int getMonth(void);
 		int getYear(void);
 		bool operator < (Date);
-		bool operator = (Date);
+		bool operator == (Date);
 		bool operator > (Date);
 		Date operator + (int);
 	private:

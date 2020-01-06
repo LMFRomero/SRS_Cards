@@ -3,7 +3,7 @@
 
 #include "Keyboard.h"
 #include "Screen.h"
-#include "Database.h"
+#include "DataBase.h"
 
 class Computer {
 	public:
@@ -12,7 +12,7 @@ class Computer {
 	private:
 		Screen screen;
 		Keyboard keyboard;
-		Database database;
+		DataBase database;
 
 		int displayMainMenu(void);
 };
