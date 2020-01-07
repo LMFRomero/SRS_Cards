@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include <time.h>
 #include "Date.h"
 
 using namespace std;
@@ -69,3 +70,12 @@ Date Date::operator + (int Days) {
 	return result;
 }
 
+Date getCurrentDate() {
+    time_t now = time(0);
+    struct tm timeStruct;
+    timeStruct = *localtime(&now);
+
+	Date date(timeStruct.tm_mday, timeStruct.tm_mon+1, timeStruct.tm_year+1900);
+
+    return date;
+}

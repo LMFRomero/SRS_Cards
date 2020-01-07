@@ -3,6 +3,8 @@
 #include "Screen.h"
 #include "Keyboard.h"
 #include "DataBase.h"
+#include "FlashCard.h"
+#include "Date.h"
 
 using namespace std;
 
@@ -10,9 +12,9 @@ enum modifyOption {EXIT = 0, VOCABULARY, PHRASES};
 enum actionOption {ADD = 1, RM};
 
 Modify::Modify (Keyboard keyboard1, Screen screen1, DataBase database1)
-	: keyboard (keyboard1), 
-	  screen(screen1),
-	  database(database1)
+	: keyboard (keyboard1),
+	  screen (screen1),
+	  database (database1)
 	  {}
 
 void Modify::execute (void) {
@@ -105,11 +107,53 @@ bool Modify::setPathInDatabase (int pasteOption) {
 	return false;
 }
 
+FlashCard Modify::getFlashCardInfo(int option) {
+	string name;
+	string japanese, furigana, translation;
+
+	screen.displayMessage("What is the card's name? ");
+	name = keyboard.getAnswer();
+
+	if (option == 1) {
+		screen.displayMessage("Japanese word: ");
+		japanese = keyboard.getAnswer();
+		screen.displayMessage("Furigana: ");
+		furigana = keyboard.getAnswer();
+		screen.displayMessage("Translation: ");
+		translation = keyboard.getAnswer();
+	}
+
+	else if (option == 2) {
+		screen.displayMessage("Japanese phrase: ");
+		japanese = keyboard.getLine();
+		screen.displayMessage("Furigana: ");
+		furigana = keyboard.getLine();
+		screen.displayMessage("Translation: ");
+		translation = keyboard.getLine();
+	}
+
+	//Summing 1 to de date so the card can be
+	//reviwed one day after its adding
+	FlashCard flashcard(name, getCurrentDate()+1, japanese, furigana, translation);
+
+	return flashcard;
+}
+
 void Modify::addFlashCard (void) {
-	bool didPasteSet = setPathInDatabase(getPasteMenu());
+	int pasteMenuOption = getPasteMenu();
+	bool didPasteSet = setPathInDatabase(pasteMenuOption);
 
 	if (didPasteSet == false) return;
 
+	FlashCard flashcard = getFlashCardInfo(pasteMenuOption);
+	
+	if (database.add(flashcard) == true) {
+		screen.displayLineMessage("Flashcard added successfully.");
+	}
+
+	else {
+		screen.displayLineMessage("Something went wrong. Try again.");
+	}
 }
 
 void Modify::removeFlashCard (void) {
@@ -122,7 +166,7 @@ void Modify::removeFlashCard (void) {
 	screen.displayMessage("Which card do you want to remove? ");
 	answer = keyboard.getAnswer();
 
-	if (database.rm(answer)) {
+	if (database.rm(answer) == true) {
 		screen.displayLineMessage("Card removed successfully.");
 	}
 

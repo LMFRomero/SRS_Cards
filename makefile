@@ -1,7 +1,7 @@
-test: screen keyboard computer dataBase date exercise modify
+test: screen keyboard computer dataBase date exercise modify flashcard
 	g++ test.cpp -o test *.o; ./test -I ./header
 
-all: screen keyboard computer dataBase date exercise modify
+all: screen keyboard computer dataBase date exercise modify flashcard
 	g++ *.o main.cpp -o prog -I ./header
 
 run: clean
@@ -30,3 +30,6 @@ exercise:
 
 modify:
 	g++ -c Modify.cpp -I ./header
+
+flashcard:
+	g++ -c FlashCard.cpp -I ./header

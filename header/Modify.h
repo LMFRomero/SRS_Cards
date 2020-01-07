@@ -5,6 +5,8 @@
 #include "Keyboard.h"
 #include "Screen.h"
 
+class FlashCard;
+
 class Modify {
 	public:
 		Modify (Keyboard, Screen, DataBase);
@@ -24,6 +26,7 @@ class Modify {
 		bool setPathInDatabase (int);
 		void addFlashCard (void);
 		void removeFlashCard (void);
+		FlashCard getFlashCardInfo (int);
 };
 
 #endif
