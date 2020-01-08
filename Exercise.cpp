@@ -3,6 +3,7 @@
 #include "Screen.h"
 #include "Keyboard.h"
 #include "Exercise.h"
+#include "FlashCard.h"
 
 using namespace std;
 
@@ -20,13 +21,14 @@ void Exercise::execute (void) {
 
 	while (!userExited) {
 		userMenuChoice = displayPlayMenu();
+		database.resetPath();
 
 		switch (userMenuChoice) {
 			case VOCABULARY:
 			case PHRASES:
 			case HIRAGANA:
 			case KATAKANA:
-				//exercise(userMenuChoice);
+				practiceCards(userMenuChoice);
 				break;
 
 			case EXIT:
@@ -49,3 +51,43 @@ int Exercise::displayPlayMenu (void) {
 	screen.displayMessage("Enter a choice: ");
 	return keyboard.getMenuOption();
 }
+
+void Exercise::practiceCards (int menuChoice) {
+	vector <FlashCard> flashCardsVector;
+	string answer = "Initializing";
+	bool hadCards = false;
+	
+	switch (menuChoice) {
+		case HIRAGANA:
+			database.setPath("hiragana/");	
+			break;
+
+		case KATAKANA:
+			database.setPath("katakana/");
+			break;
+
+		case VOCABULARY:
+			database.setPath("vocabulary/");
+			break;
+
+		case PHRASES:
+			database.setPath("phrases/");
+			break;
+	}	
+
+	flashCardsVector = database.getTodaysCards();
+
+	while (flashCardsVector.empty() == false and answer.empty() == false) {
+		
+	}
+
+	if (flashCardsVector.empty() == true) {
+		if (hadCards == true)
+			screen.displayLineMessage("No more cards to review today.");
+		else
+			screen.displayLineMessage("No cards to review today.");
+	}
+
+	
+}
+

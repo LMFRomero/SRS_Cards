@@ -18,7 +18,9 @@ class Exercise {
 		Keyboard keyboard;
 		DataBase database;
 
-		int displayPlayMenu ();
+		int displayPlayMenu (void);
+		void practiceCards (int);
+
 };
 
 #endif

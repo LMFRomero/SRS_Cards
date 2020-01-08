@@ -2,9 +2,9 @@
 #define DATABASE_H
 
 #include <string>
+#include "FlashCard.h"
 using namespace std;
 
-class FlashCard;
 
 class DataBase{
 	public:
@@ -15,6 +15,7 @@ class DataBase{
 		string getPath (void);
 		bool add (FlashCard);
 		bool rm (string);
+		vector <FlashCard> getTodaysCards (void);
 
 	private:
 		string path;

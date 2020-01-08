@@ -60,7 +60,6 @@ int Computer::displayMainMenu (void) {
 	screen.displayLineMessage("0 - Exit");
 	screen.displayMessage("Enter a choice: ");
 	return keyboard.getMenuOption();
-
 }
 
  

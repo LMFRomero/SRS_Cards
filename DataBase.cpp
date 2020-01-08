@@ -131,3 +131,7 @@ bool DataBase::add (FlashCard flashcard) {
 
 	return true;
 }
+
+vector <FlashCard> DataBase::getTodaysCards (void) {
+
+}

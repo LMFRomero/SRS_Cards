@@ -19,8 +19,11 @@ int Keyboard::getMenuOption(void) {
 
 string Keyboard::getAnswer(void) {
 	string answer;
+	char *answerPtr;
 
-	cin >> answer;
+	if (scanf(" %ms", &answerPtr) == EOF) return answer;
+
+	answer = string(answerPtr);
 
 	return answer; 
 }
