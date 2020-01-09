@@ -170,6 +170,9 @@ vector <FlashCard> DataBase::getTodaysCards (void) {
 
 	fclose(cardList);
 
+	srand(unsigned(time(NULL)));
+	random_shuffle(flashCardVector.begin(), flashCardVector.end()); 
+
 	return flashCardVector;
 }
 
