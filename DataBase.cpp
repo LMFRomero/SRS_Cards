@@ -124,7 +124,7 @@ void DataBase::appendToCardList (FlashCard flashcard) {
 		isEmpty = false;
 	}
 
-	if (isEmpty == true) {
+	if (isEmpty == true or (isEmpty == false and wasAdded == false)) {
 			fprintf(tmp, "%s %d %d %d\n", cardName.c_str(), fcDay, fcMonth, fcYear);	
 	}
 

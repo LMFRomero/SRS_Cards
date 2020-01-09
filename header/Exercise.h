@@ -23,7 +23,7 @@ class Exercise {
 		int showFlashcard (FlashCard);
 		int getAnswerQuality (void);
 		void setPathInDatabase (int);
-		float parseQuality (int);
+		float parseQuality (int, float);
 		int parseLN (int, float);
 
 };

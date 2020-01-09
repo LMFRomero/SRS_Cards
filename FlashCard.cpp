@@ -42,7 +42,7 @@ void FlashCard::setLN (int ln) {
 	LN = ln;
 }
 
-void FlashCard::setEF (int ef) {
+void FlashCard::setEF (float ef) {
 	EF = ef;
 }
 

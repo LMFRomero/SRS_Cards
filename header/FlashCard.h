@@ -19,7 +19,7 @@ class FlashCard {
 		string getTranslation (void);
 
 		void setLN (int);
-		void setEF (int);
+		void setEF (float);
 		void setDate (Date);
 
 	

@@ -1,6 +1,15 @@
+#ifdef __unix__
+	#define STDINPATH "/dev/tty"
+
+#elif defined(_WIN32) || defined(WIN32)
+	#define STDINPATH "con:"
+
+#endif
+
 #include <iostream>
 #include <stdlib.h>
 #include "Keyboard.h"
+
 
 using namespace std;
 
@@ -48,7 +57,7 @@ int Keyboard::getChar(void) {
 	int number = scanf("%*c%*c");
 
 	if (number == EOF) {
-		freopen("/dev/tty", "r", stdin);
+		freopen(STDINPATH, "r", stdin);
 	}
 
 	return number;

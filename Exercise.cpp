@@ -68,6 +68,8 @@ void Exercise::practiceCards (int menuChoice) {
 		hadCards == true;
 		
 		FlashCard flashcard = flashCardsVector.back();
+		LN = flashcard.getLN();
+		EF = flashcard.getEF();
 		
 		quality = showFlashcard(flashcard);	
 		
@@ -76,18 +78,20 @@ void Exercise::practiceCards (int menuChoice) {
 			break;
 		}
 
-		EF += parseQuality(quality);
+		EF = parseQuality(quality, EF);
 		LN = parseLN(LN, EF);
 		Date date = flashcard.getDate();
 		date = date + LN;
+
+		cout << "LN after" << LN << endl;
 
 		flashcard.setLN(LN);
 		flashcard.setEF(EF);
 		flashcard.setDate(date);
 
-		flashCardsVector.pop_back();
-
 		database.updateFlashCard(flashcard);
+
+		flashCardsVector.pop_back();
 	}
 
 	if (flashCardsVector.empty() == true) {
@@ -112,7 +116,7 @@ int Exercise::showFlashcard (FlashCard flashcard) {
 		screen.displayLineMessage(furigana);
 	}
 
-	screen.displayLineMessage("Type any key to show translation.");
+	screen.displayLineMessage("Type ENTER to show translation.");
 
 	if (keyboard.getChar() == EOF)  {
 		return EOF;
@@ -156,8 +160,8 @@ void Exercise::setPathInDatabase (int menuChoice) {
 	}
 }
 
-float Exercise::parseQuality (int q) {
-	float EF = 0.1 - (5 - q) * (0.08 + (5 - q) * 0.02);
+float Exercise::parseQuality (int q, float oldEF) {
+	float EF = oldEF + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02));
 	return (EF < 1.3 ? 1.3 : EF);
 }
 
