@@ -63,6 +63,8 @@ void Exercise::practiceCards (int menuChoice) {
 
 	setPathInDatabase (menuChoice);
 	
+	cout << "passou" << database.getPath() << endl;
+
 	flashCardsVector = database.getTodaysCards();
 
 	if (flashCardsVector.empty() == true) cout << "vazio" << endl;

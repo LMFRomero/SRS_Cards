@@ -151,6 +151,7 @@ vector <FlashCard> DataBase::getTodaysCards (void) {
 
 	vector <FlashCard> flashCardVector;
 
+
 	while (fscanf(cardList, " %ms %d %d %d", &name, &day, &month, &year) != EOF) {
 		Date tmpDate(day, month, year);
 
@@ -160,16 +161,14 @@ vector <FlashCard> DataBase::getTodaysCards (void) {
 		pathTmpCard.append(string(name));
 		tmpFile = fopen(pathTmpCard.c_str(), "r+");
 
-		if (!tmpFile) cout << pathTmpCard << endl;
-
 		fscanf(tmpFile, "%d %f %ms %ms %ms", &LN, &EF, &japanese, &furigana, &translation);
 		
 		FlashCard flashcard(name, LN, EF, tmpDate, string(japanese), string(furigana), string(translation));
 		flashCardVector.push_back(flashcard);
+		fclose(tmpFile);
 	}
 
 	fclose(cardList);
-	fclose(tmpFile);
 
 	return flashCardVector;
 }
