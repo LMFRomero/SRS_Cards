@@ -33,3 +33,4 @@ modify:
 
 flashcard:
 	g++ -c FlashCard.cpp -I ./header
+

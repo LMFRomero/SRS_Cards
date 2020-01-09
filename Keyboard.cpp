@@ -35,7 +35,7 @@ string Keyboard::getAnswer(void) {
 	char *answerPtr;
 
 	if (scanf(" %ms", &answerPtr) == EOF) {
-		freopen("/dev/tty", "r", stdin);
+		freopen(STDINPATH, "r", stdin);
 	      	return answer;
 	}
 
@@ -46,15 +46,27 @@ string Keyboard::getAnswer(void) {
 
 string Keyboard::getLine(void) {
 	string answer;
+	char *answerPtr;
 
-	getline(cin, answer);
+	if (scanf(" %m[^\r\n]", &answerPtr) == EOF) {
+		freopen(STDINPATH, "r", stdin);
+	      	return answer;
+	}
 
-	return answer;
+	answer = string(answerPtr);
+
+	return answer; 
 }
 
 int Keyboard::getChar(void) {
 	fflush(stdin);
-	int number = scanf("%*c%*c");
+	char flag;
+
+	int number = scanf("%*c%c", &flag);
+
+	if ((int) flag != 10) {
+		number = scanf("%*s");
+	}
 
 	if (number == EOF) {
 		freopen(STDINPATH, "r", stdin);

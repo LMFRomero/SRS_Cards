@@ -153,6 +153,7 @@ vector <FlashCard> DataBase::getTodaysCards (void) {
 
 	while (fscanf(cardList, " %ms %d %d %d", &name, &day, &month, &year) != EOF) {
 		Date tmpDate(day, month, year);
+
 		if (tmpDate > today) break;
 
 		pathTmpCard = pathToPaste;

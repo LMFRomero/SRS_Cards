@@ -59,10 +59,14 @@ void Exercise::practiceCards (int menuChoice) {
 
 	int LN;
 	float EF;
+	Date todayDate = getCurrentDate();
 
 	setPathInDatabase (menuChoice);
 	
 	flashCardsVector = database.getTodaysCards();
+
+	if (flashCardsVector.empty() == true) cout << "vazio" << endl;
+	else cout << "nao vazio" << endl;
 
 	while (flashCardsVector.empty() == false) {
 		hadCards == true;
@@ -80,10 +84,7 @@ void Exercise::practiceCards (int menuChoice) {
 
 		EF = parseQuality(quality, EF);
 		LN = parseLN(LN, EF);
-		Date date = flashcard.getDate();
-		date = date + LN;
-
-		cout << "LN after" << LN << endl;
+		Date date = todayDate + LN;
 
 		flashcard.setLN(LN);
 		flashcard.setEF(EF);
@@ -107,7 +108,7 @@ int Exercise::showFlashcard (FlashCard flashcard) {
 	string furigana = flashcard.getFurigana();
 	string translation = flashcard.getTranslation();
 	
-	screen.displayLineMessage("Ctrl+D to stop.");
+	screen.displayLineMessage("\nCtrl+D to stop.");
 	screen.displayMessage("Japanese: ");
 	screen.displayLineMessage(japanese);
 

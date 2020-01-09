@@ -132,6 +132,10 @@ FlashCard Modify::getFlashCardInfo(int option) {
 		translation = keyboard.getLine();
 	}
 
+	if (name.empty() or japanese.empty() or furigana.empty() or translation.empty()) {
+		name.clear();
+	}
+
 	//Summing 1 to de date so the card can be
 	//reviwed one day after its adding
 	FlashCard flashcard(name, 0, 2.5, getCurrentDate()+1, japanese, furigana, translation);
@@ -146,6 +150,8 @@ void Modify::addFlashCard (void) {
 	if (didPasteSet == false) return;
 
 	FlashCard flashcard = getFlashCardInfo(pasteMenuOption);
+
+	if (flashcard.getName().empty() == true) return;
 	
 	if (database.add(flashcard) == true) {
 		screen.displayLineMessage("Flashcard added successfully.");
