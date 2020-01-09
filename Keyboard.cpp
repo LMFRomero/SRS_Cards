@@ -11,7 +11,11 @@ int Keyboard::getMenuOption(void) {
 	fflush(stdin);
 	fflush(stdout);
 
-	scanf(" %[^\n\r]", answer);
+	if (scanf(" %[^\n\r]", answer) == EOF) { 
+		freopen("/dev/tty", "r", stdin);
+		return -1;
+	}
+
 	int number = static_cast<int> (strtol(answer, &pEnd, 10));
 
 	return number;
@@ -21,7 +25,10 @@ string Keyboard::getAnswer(void) {
 	string answer;
 	char *answerPtr;
 
-	if (scanf(" %ms", &answerPtr) == EOF) return answer;
+	if (scanf(" %ms", &answerPtr) == EOF) {
+		freopen("/dev/tty", "r", stdin);
+	      	return answer;
+	}
 
 	answer = string(answerPtr);
 
@@ -34,4 +41,15 @@ string Keyboard::getLine(void) {
 	getline(cin, answer);
 
 	return answer;
+}
+
+int Keyboard::getChar(void) {
+	fflush(stdin);
+	int number = scanf("%*c%*c");
+
+	if (number == EOF) {
+		freopen("/dev/tty", "r", stdin);
+	}
+
+	return number;
 }

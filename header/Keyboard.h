@@ -10,6 +10,7 @@ class Keyboard {
 		int getMenuOption(void);
 		string getAnswer(void);
 		string getLine(void);
+		int getChar (void);
 };
 
 #endif

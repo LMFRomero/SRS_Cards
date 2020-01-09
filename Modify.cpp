@@ -134,7 +134,7 @@ FlashCard Modify::getFlashCardInfo(int option) {
 
 	//Summing 1 to de date so the card can be
 	//reviwed one day after its adding
-	FlashCard flashcard(name, getCurrentDate()+1, japanese, furigana, translation);
+	FlashCard flashcard(name, 0, 2.5, getCurrentDate()+1, japanese, furigana, translation);
 
 	return flashcard;
 }

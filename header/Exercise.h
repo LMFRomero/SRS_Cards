@@ -20,6 +20,11 @@ class Exercise {
 
 		int displayPlayMenu (void);
 		void practiceCards (int);
+		int showFlashcard (FlashCard);
+		int getAnswerQuality (void);
+		void setPathInDatabase (int);
+		float parseQuality (int);
+		int parseLN (int, float);
 
 };
 

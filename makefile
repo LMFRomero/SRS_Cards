@@ -1,5 +1,5 @@
-test: screen keyboard computer dataBase date exercise modify flashcard
-	g++ test.cpp -o test *.o ./test -I ./header
+teste: screen keyboard computer dataBase date exercise modify flashcard
+	g++ test.cpp -o test *.o -I ./header
 
 all: screen keyboard computer dataBase date exercise modify flashcard
 	g++ *.o main.cpp -o prog -I ./header

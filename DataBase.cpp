@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "DataBase.h"
 #include "FlashCard.h"
+#include "Date.h"
 
 using namespace std;
 
@@ -37,8 +38,6 @@ bool DataBase::rm (string fileName) {
 	FILE *list;
 	FILE *tmp;
 
-
-
 	cardPath.append(fileName);
 	listPath.append("cardList");
 	tmpPath.append("tmp");
@@ -69,25 +68,15 @@ bool DataBase::rm (string fileName) {
 
 bool DataBase::add (FlashCard flashcard) {
 	string cardName = flashcard.getName();
-	string cardPath = this->getPath().append(cardName);
 	string japanese = flashcard.getJapanese();
 	string furigana = flashcard.getFurigana();
 	string translation = flashcard.getTranslation();
-	string cardListPath = this->getPath().append("cardList"); 
-	string tmpPath = this->getPath().append("tmp");
-
-	Date date = flashcard.getDate();
-
 	int LN = flashcard.getLN();
 	float EF = flashcard.getEF();
-	int fcDay = date.getDay();
-	int fcMonth = date.getMonth();
-	int fcYear = date.getYear();
+
+	string cardPath = this->getPath().append(cardName);
 
 	FILE *fileName;	
-	FILE *cardList;
-	FILE *tmp;
-
 
 	fileName = fopen(cardPath.c_str(), "r");
 	if (fileName != NULL) {
@@ -99,9 +88,24 @@ bool DataBase::add (FlashCard flashcard) {
 	fprintf(fileName, "%d\n%f\n%s\n%s\n%s\n", LN, EF, japanese.c_str(), furigana.c_str(), translation.c_str());
 
 	fclose(fileName);
+	
+	appendToCardList(flashcard);
 
-	cardList = fopen(cardListPath.c_str(), "r+");
-	tmp = fopen(tmpPath.c_str(), "w+");
+	return true;
+}
+
+void DataBase::appendToCardList (FlashCard flashcard) {
+	string cardName = flashcard.getName();
+	Date date = flashcard.getDate();
+	int fcDay = date.getDay();
+	int fcMonth = date.getMonth();
+	int fcYear = date.getYear();
+
+	string cardListPath = this->getPath().append("cardList"); 
+	string tmpPath = this->getPath().append("tmp");
+
+	FILE *cardList = fopen(cardListPath.c_str(), "a+");
+	FILE *tmp = fopen(tmpPath.c_str(), "w+");
 
 	bool wasAdded = false;
 	bool isEmpty = true;
@@ -128,10 +132,49 @@ bool DataBase::add (FlashCard flashcard) {
 	fclose(tmp);
 	remove(cardListPath.c_str());
 	rename(tmpPath.c_str(), cardListPath.c_str());
-
-	return true;
 }
 
 vector <FlashCard> DataBase::getTodaysCards (void) {
+	string pathToPaste = getPath();
+	string pathCardList = getPath().append("cardList");
+	string pathTmpCard;
 
+	Date today = getCurrentDate();
+	int day, month, year;
+	char *name;
+	int LN;
+	float EF;
+	char *japanese, *furigana, *translation;
+
+	FILE *cardList = fopen(pathCardList.c_str(), "a+");
+	FILE *tmpFile;
+
+	vector <FlashCard> flashCardVector;
+
+	while (fscanf(cardList, " %ms %d %d %d", &name, &day, &month, &year) != EOF) {
+		Date tmpDate(day, month, year);
+		if (tmpDate > today) break;
+
+		pathTmpCard = pathToPaste;
+		pathTmpCard.append(string(name));
+		tmpFile = fopen(pathTmpCard.c_str(), "r+");
+
+		if (!tmpFile) cout << pathTmpCard << endl;
+
+		fscanf(tmpFile, "%d %f %ms %ms %ms", &LN, &EF, &japanese, &furigana, &translation);
+		
+		FlashCard flashcard(name, LN, EF, tmpDate, string(japanese), string(furigana), string(translation));
+		flashCardVector.push_back(flashcard);
+	}
+
+	fclose(cardList);
+	fclose(tmpFile);
+
+	return flashCardVector;
+}
+
+void DataBase::updateFlashCard (FlashCard flashcard) {
+	string name = flashcard.getName();
+	rm(name);
+	add(flashcard);
 }

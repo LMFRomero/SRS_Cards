@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
 #include "FlashCard.h"
 
-FlashCard::FlashCard (string fcName, Date fcDate, string Jap, string Fur, string Tra) : date(fcDate) {
+FlashCard::FlashCard (string fcName, int ln, float ef, Date fcDate, string Jap, string Fur, string Tra) : date(fcDate) {
 	name = fcName;
 	japanese = Jap;
 	furigana = Fur;
 	translation = Tra;
-	LN = 0;
-	EF = 2.5;
+	LN = ln;
+	EF = ef;
 }
 
 string FlashCard::getName (void) {
@@ -38,3 +38,14 @@ string FlashCard::getTranslation (void) {
 	return translation;
 }
 
+void FlashCard::setLN (int ln) {
+	LN = ln;
+}
+
+void FlashCard::setEF (int ef) {
+	EF = ef;
+}
+
+void FlashCard::setDate (Date fcDate) {
+	date = fcDate;
+}

@@ -8,7 +8,8 @@ using std::string;
 
 class FlashCard {
 	public:
-		FlashCard(string, Date, string, string, string);
+		FlashCard(string, int, float, Date, string, string, string);
+
 		string getName (void);
 		Date getDate (void);
 		int getLN (void);
@@ -16,6 +17,11 @@ class FlashCard {
 		string getJapanese (void);
 		string getFurigana (void);
 		string getTranslation (void);
+
+		void setLN (int);
+		void setEF (int);
+		void setDate (Date);
+
 	
 	private:
 		string name;

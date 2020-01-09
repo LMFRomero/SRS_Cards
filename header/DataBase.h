@@ -16,8 +16,10 @@ class DataBase{
 		bool add (FlashCard);
 		bool rm (string);
 		vector <FlashCard> getTodaysCards (void);
+		void updateFlashCard (FlashCard);
 
 	private:
+		void appendToCardList (FlashCard);
 		string path;
 };
 
