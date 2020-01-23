@@ -80,7 +80,7 @@ void Exercise::practiceCards (int menuChoice) {
 		}
 
 		EF = parseQuality(quality, EF);
-		LN = parseLN(LN, EF);
+		LN = parseLN(LN, EF, quality);
 		Date date = todayDate + LN;
 
 		flashcard.setLN(LN);
@@ -163,7 +163,11 @@ float Exercise::parseQuality (int q, float oldEF) {
 	return (EF < 1.3 ? 1.3 : EF);
 }
 
-int Exercise::parseLN (int LN, float EF) {
+int Exercise::parseLN (int LN, float EF, int quality) {
+		if (quality <= 2 and quality >= 0) {
+			return 1;
+		}
+
 		switch (LN) {
 			case 0:
 				LN = 1;

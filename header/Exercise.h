@@ -24,7 +24,7 @@ class Exercise {
 		int getAnswerQuality (void);
 		void setPathInDatabase (int);
 		float parseQuality (int, float);
-		int parseLN (int, float);
+		int parseLN (int, float, int);
 
 };
 
